@@ -150,7 +150,7 @@ Construa um Analisador Léxico que reconheça:
     [r_bracket, }] [comma, ,] [semicolon, ;]
     ```
 
-O trabalho pode ser realizado em grupos de até 4 alunos, bem como deverá ser entregue pelo Moodle até o dia 24/09 e apresentado ao professor nessa mesma data. A seguir, o código que o analisador léxico deve receber para gerar o conjunto de tokens descrito anteriormente:
+📌 O trabalho pode ser realizado em grupos de até 4 alunos, bem como deverá ser entregue pelo Moodle até o dia 24/09 e apresentado ao professor nessa mesma data. A seguir, o código que o analisador léxico deve receber para gerar o conjunto de tokens descrito anteriormente:
 
 ```c
 #include <stdio.h> 
