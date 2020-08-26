@@ -12,7 +12,7 @@
 
 > Enunciado
 
-Construa um Analisador Léxico que reconheça:
+Construir um Analisador Léxico que reconheça:
 
 - Variáveis ou identificadores: este analisador léxico deve ser capaz de reconhecer nomes de variáveis, funções, parâmetros de funções. em um código fonte:
 
@@ -239,6 +239,15 @@ int main()
     return 0; 
 }
 ```
+
+> How to Run
+
+- Seguir documentação de instalação do windows em [installation procedures](https://www.jflex.de/installing.html)
+- na linha de comando rodar jflex <nomeArquivo.flex>
+   - este arquivo .flex contém as regras para gerar o .java executável
+   - após a execução do comando um arquivo .java deve ser gerado
+- na linha de comando rodar java <nomeArquivo.java> <nomeArquivo.in>
+   - com este comando o analisador léxico gerado no arquivo .java será rodado contra a entrada que será o arquivo .in
 
 > Dependências
 
