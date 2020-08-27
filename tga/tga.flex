@@ -32,7 +32,9 @@ Id = [a-z][a-z0-9]*
 
 %%
 
-{Digit}+ { System.out.println("Found digit: " + yytext()); }
+{Digit}+ { System.out.println("[num, " + yytext() + "]"); }
+
+{Digit}+"."{Digit}+ { System.out.println("[num, " + yytext() + "]"); }
 
 {WhiteSpace} { /* ignore */ }
 

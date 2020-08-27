@@ -75,7 +75,7 @@ public class AnalisadorLexico {
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\1\1\1\2\1\0\1\1\1\3\22\0\1\1"+
-    "\17\0\12\4\u01c6\0";
+    "\15\0\1\4\1\0\12\5\u01c6\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[512];
@@ -102,10 +102,10 @@ public class AnalisadorLexico {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\2\2\1\3";
+    "\1\0\1\1\2\2\1\3\1\0\1\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[5];
+    int [] result = new int[7];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -130,10 +130,10 @@ public class AnalisadorLexico {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\5\0\5\0\12\0\17";
+    "\0\0\0\6\0\6\0\14\0\22\0\30\0\30";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[5];
+    int [] result = new int[7];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -156,10 +156,11 @@ public class AnalisadorLexico {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\2\3\1\4\1\5\7\0\1\3\6\0\1\5";
+    "\1\2\2\3\1\4\1\2\1\5\10\0\1\3\7\0"+
+    "\1\6\1\5\5\0\1\7";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[20];
+    int [] result = new int[30];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -202,10 +203,10 @@ public class AnalisadorLexico {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\11\2\1";
+    "\1\0\2\11\2\1\1\0\1\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[5];
+    int [] result = new int[7];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -634,7 +635,7 @@ public class AnalisadorLexico {
             // fall through
           case 5: break;
           case 3:
-            { System.out.println("Found digit: " + yytext());
+            { System.out.println("[num, " + yytext() + "]");
             }
             // fall through
           case 6: break;
