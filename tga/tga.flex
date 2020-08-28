@@ -21,7 +21,31 @@
 %unicode
 
 %{
-  String test;
+  private void writeOtherChar(String value) {
+  	switch(value){
+  		case "=":
+  			System.out.println("[equal, " + yytext() + "]"); 
+  			break;
+  		case "(":
+  			System.out.println("[l_paren, " + yytext() + "]"); 
+  			break;
+  		case ")":
+  			System.out.println("[r_paren, " + yytext() + "]"); 
+  			break;
+  		case "{":
+  			System.out.println("[l_bracket, " + yytext() + "]"); 
+  			break;
+  		case "}":
+  			System.out.println("[r_bracket, " + yytext() + "]"); 
+  			break;
+  		case ",":
+  			System.out.println("[comma, " + yytext() + "]"); 
+  			break;
+  		case ";":
+  			System.out.println("[semicolon, " + yytext() + "]"); 
+  			break;
+  	}
+  }
 %}
 
 LineTerminator = \r|\n|\r\n
@@ -38,6 +62,8 @@ Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"
 OtherReservedWord = "return"|"void"|"printf"|"scanf"
 ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
+OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
@@ -51,6 +77,9 @@ Id = [a-z][a-z0-9]*
 
 /* reserved words */
 {ReservedWord} { System.out.println("[reserved_word, " + yytext() + "]"); }
+
+/* other characteres */
+{OtherCharacteres} { writeOtherChar(yytext()); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }

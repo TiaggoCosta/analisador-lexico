@@ -27,4 +27,5 @@ bool
 bull
 int string
 float double 
-if(vetor != NULL)
+if(vetor != NULL);
+, {}
