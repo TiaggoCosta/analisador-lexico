@@ -32,14 +32,25 @@ TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
 Comment = {TraditionalComment} | {EndOfLineComment}
 
+Condition = "if"|"else"|"switch"|"case"
+Loop = "do"|"while"|"for"|"break"
+Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"
+OtherReservedWord = "return"|"void"|"printf"|"scanf"
+ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
 %%
 
+/* integers */
 {Digit}+ { System.out.println("[num, " + yytext() + "]"); }
 
+/* floats */
 {Digit}+"."{Digit}+ { System.out.println("[num, " + yytext() + "]"); }
+
+/* reserved words */
+{ReservedWord} { System.out.println("[reserved_word, " + yytext() + "]"); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
