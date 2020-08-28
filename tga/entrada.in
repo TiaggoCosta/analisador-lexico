@@ -29,3 +29,4 @@ int string
 float double 
 if(vetor != NULL);
 , {}
+& || b && a | | li

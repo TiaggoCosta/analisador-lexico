@@ -66,6 +66,8 @@ OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
 
 RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
+LogicalOperator = "&&"|"||"
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
@@ -85,6 +87,9 @@ Id = [a-z][a-z0-9]*
 
 /* relational operator */
 {RelationalOperator} { System.out.println("[relational_operator, " + yytext() + "]"); }
+
+/* logical operator */
+{LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
