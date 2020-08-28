@@ -64,6 +64,8 @@ ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
 OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
 
+RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
@@ -80,6 +82,9 @@ Id = [a-z][a-z0-9]*
 
 /* other characteres */
 {OtherCharacteres} { writeOtherChar(yytext()); }
+
+/* relational operator */
+{RelationalOperator} { System.out.println("[relational_operator, " + yytext() + "]"); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
