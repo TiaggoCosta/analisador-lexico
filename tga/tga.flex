@@ -38,6 +38,9 @@ Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"
 OtherReservedWord = "return"|"void"|"printf"|"scanf"
 ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
+
+RelationalOperator = "<"|"<="|"=="|"="|">="|">"
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
@@ -51,6 +54,9 @@ Id = [a-z][a-z0-9]*
 
 /* reserved words */
 {ReservedWord} { System.out.println("[reserved_word, " + yytext() + "]"); }
+
+/* relational operator */
+{RelationalOperator} { System.out.println("[elational_operator, " + yytext() + "]"); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
