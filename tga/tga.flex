@@ -63,8 +63,8 @@ Comment = {TraditionalComment} | {EndOfLineComment}
 
 Condition = "if"|"else"|"switch"|"case"
 Loop = "do"|"while"|"for"|"break"
-Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"
-OtherReservedWord = "return"|"void"|"printf"|"scanf"
+Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"|"void"
+OtherReservedWord = "return"
 ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
 OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
