@@ -78,10 +78,11 @@ public class AnalisadorLexico {
     "\1\4\1\5\3\0\1\6\1\0\2\7\1\10\1\11"+
     "\1\7\1\11\1\12\1\13\12\14\1\0\1\7\1\15"+
     "\1\16\1\15\2\0\13\17\1\20\1\17\1\21\6\17"+
-    "\1\22\5\17\6\0\1\23\1\24\1\25\1\26\1\27"+
-    "\1\30\1\31\1\32\1\33\1\17\1\34\1\35\1\17"+
-    "\1\36\1\37\2\17\1\40\1\41\1\42\1\43\1\44"+
-    "\1\45\3\17\1\7\1\46\1\7\u0182\0";
+    "\1\22\5\17\1\7\1\0\1\7\3\0\1\23\1\24"+
+    "\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17"+
+    "\1\34\1\35\1\17\1\36\1\37\2\17\1\40\1\41"+
+    "\1\42\1\43\1\44\1\45\3\17\1\7\1\46\1\7"+
+    "\u0182\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[512];
@@ -174,7 +175,7 @@ public class AnalisadorLexico {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\2\3\1\4\1\5\1\6\1\7\1\10\2\11"+
-    "\1\2\1\12\1\13\1\14\1\15\2\16\1\17\2\16"+
+    "\1\10\1\12\1\13\1\14\1\15\2\16\1\17\2\16"+
     "\1\20\1\21\1\22\1\23\1\24\2\16\1\25\2\16"+
     "\1\26\1\16\1\27\1\30\2\16\1\31\1\32\1\33"+
     "\51\0\1\3\62\0\1\34\30\0\5\35\1\36\41\35"+
@@ -357,18 +358,27 @@ public class AnalisadorLexico {
   		case ")":
   			System.out.println("[r_paren, " + yytext() + "]"); 
   			break;
-  		case "{":
+  		case "[":
   			System.out.println("[l_bracket, " + yytext() + "]"); 
   			break;
-  		case "}":
+  		case "]":
   			System.out.println("[r_bracket, " + yytext() + "]"); 
   			break;
+      case "{":
+        System.out.println("[l_braces, " + yytext() + "]"); 
+        break;
+      case "}":
+        System.out.println("[r_braces, " + yytext() + "]"); 
+        break;
   		case ",":
   			System.out.println("[comma, " + yytext() + "]"); 
   			break;
   		case ";":
   			System.out.println("[semicolon, " + yytext() + "]"); 
   			break;
+      case ".":
+        System.out.println("[dot, " + yytext() + "]"); 
+        break;
   	}
   }
 

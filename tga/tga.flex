@@ -32,18 +32,27 @@
   		case ")":
   			System.out.println("[r_paren, " + yytext() + "]"); 
   			break;
-  		case "{":
+  		case "[":
   			System.out.println("[l_bracket, " + yytext() + "]"); 
   			break;
-  		case "}":
+  		case "]":
   			System.out.println("[r_bracket, " + yytext() + "]"); 
   			break;
+      case "{":
+        System.out.println("[l_braces, " + yytext() + "]"); 
+        break;
+      case "}":
+        System.out.println("[r_braces, " + yytext() + "]"); 
+        break;
   		case ",":
   			System.out.println("[comma, " + yytext() + "]"); 
   			break;
   		case ";":
   			System.out.println("[semicolon, " + yytext() + "]"); 
   			break;
+      case ".":
+        System.out.println("[dot, " + yytext() + "]"); 
+        break;
   	}
   }
 
@@ -67,7 +76,7 @@ Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"|"void"
 OtherReservedWord = "return"
 ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
-OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
+OtherCharacteres = "="|"("|")"|"{"|"}"|"["|"]"|","|";"|"."
 
 RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
