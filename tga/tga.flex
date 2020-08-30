@@ -73,6 +73,8 @@ RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
 LogicalOperator = "&&"|"||"
 
+ArithmeticOperator = "+"|"-"|"*"|"/"
+
 Digit = [0-9]
 Id = [a-zA-Z][a-zA-Z0-9]*
 String = (\"[^\"]*\")
@@ -96,6 +98,9 @@ String = (\"[^\"]*\")
 
 /* logical operator */
 {LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
+
+/* arithmetic operator */
+{ArithmeticOperator} { System.out.println("[arithmetic_operator, " + yytext() + "]"); }
 
 /* strings */
 {String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); }
