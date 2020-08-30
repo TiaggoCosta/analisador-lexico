@@ -248,6 +248,12 @@ int main()
    - após a execução do comando um arquivo .java deve ser gerado
 - na linha de comando rodar java <nomeArquivo.java> <nomeArquivo.in>
    - com este comando o analisador léxico gerado no arquivo .java será rodado contra a entrada que será o arquivo .in
+   
+> Referências
+
+- [Expressão Regular para String](https://regexlib.com/REDetails.aspx?regexp_id=133)
+    - A expressão foi adaptada
+- [Exemplo com expressão para comentários](https://www.jflex.de/manual.html#Example)
 
 > Dependências
 
