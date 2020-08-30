@@ -46,6 +46,11 @@
   			break;
   	}
   }
+
+  private String getFormattedString(String text) {
+    String withoutQuotes = text.replaceAll("\"", "");
+    return withoutQuotes.replaceAll("\\s+", " ");
+  }
 %}
 
 LineTerminator = \r|\n|\r\n
@@ -69,7 +74,8 @@ RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 LogicalOperator = "&&"|"||"
 
 Digit = [0-9]
-Id = [a-z][a-z0-9]*
+Id = [a-zA-Z][a-zA-Z0-9]*
+String = (\"[^\"]*\")
 
 %%
 
@@ -90,6 +96,12 @@ Id = [a-z][a-z0-9]*
 
 /* logical operator */
 {LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
+
+/* strings */
+{String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); }
+
+/* identifiers */
+{Id} { System.out.println("identificador: " + yytext()); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
