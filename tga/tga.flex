@@ -44,19 +44,33 @@
   		case ")":
   			System.out.println("[r_paren, " + yytext() + "]"); 
   			break;
-  		case "{":
+  		case "[":
   			System.out.println("[l_bracket, " + yytext() + "]"); 
   			break;
-  		case "}":
+  		case "]":
   			System.out.println("[r_bracket, " + yytext() + "]"); 
   			break;
+      case "{":
+        System.out.println("[l_braces, " + yytext() + "]"); 
+        break;
+      case "}":
+        System.out.println("[r_braces, " + yytext() + "]"); 
+        break;
   		case ",":
   			System.out.println("[comma, " + yytext() + "]"); 
   			break;
   		case ";":
   			System.out.println("[semicolon, " + yytext() + "]"); 
   			break;
+      case ".":
+        System.out.println("[dot, " + yytext() + "]"); 
+        break;
   	}
+  }
+
+  private String getFormattedString(String text) {
+    String withoutQuotes = text.replaceAll("\"", "");
+    return withoutQuotes.replaceAll("\\s+", " ");
   }
 %}
 
@@ -70,11 +84,11 @@ Comment = {TraditionalComment} | {EndOfLineComment}
 
 Condition = "if"|"else"|"switch"|"case"
 Loop = "do"|"while"|"for"|"break"
-Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"
-OtherReservedWord = "return"|"void"|"printf"|"scanf"
+Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"|"void"
+OtherReservedWord = "return"
 ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
 
-OtherCharacteres = "="|"("|")"|"{"|"}"|","|";"
+OtherCharacteres = "="|"("|")"|"{"|"}"|"["|"]"|","|";"|"."
 
 RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
@@ -82,8 +96,11 @@ LogicalOperator = "&&"|"||"
 
 Identifier = "#identificador"
 
+ArithmeticOperator = "+"|"-"|"*"|"/"
+
 Digit = [0-9]
-Id = [a-z][a-z0-9]*
+Id = [a-zA-Z][a-zA-Z0-9]*
+String = (\"[^\"]*\")
 
 %%
 
@@ -104,6 +121,15 @@ Id = [a-z][a-z0-9]*
 
 /* logical operator */
 {LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
+
+/* arithmetic operator */
+{ArithmeticOperator} { System.out.println("[arithmetic_operator, " + yytext() + "]"); }
+
+/* strings */
+{String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); }
+
+/* identifiers */
+{Id} { System.out.println("identificador: " + yytext()); }
 
 /* check identifier */
 {Identifier} { printIdentifier(yytext()); }
