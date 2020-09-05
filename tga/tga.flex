@@ -12,6 +12,11 @@
    para o trabalho do GA da disciplina de Tradutores da UNISINOS
 */
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 %%
 
 %public
@@ -31,6 +36,7 @@
 			identifiers.put(word, identifierCount);
 			System.out.printf("[Id, %s]", identifierCount);
 		}
+		System.out.println("Map id" + identifiers.toString());
 	}
 
   private void writeOtherChar(String value) {
@@ -94,13 +100,13 @@ RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
 LogicalOperator = "&&"|"||"
 
-Identifier = "#identificador"
-
 ArithmeticOperator = "+"|"-"|"*"|"/"
 
 Digit = [0-9]
 Id = [a-zA-Z][a-zA-Z0-9]*
 String = (\"[^\"]*\")
+
+Identifier = "#"{Id}
 
 %%
 
