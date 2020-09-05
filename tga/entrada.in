@@ -29,4 +29,6 @@ int string
 float double 
 if(vetor != NULL);
 , {}
+#identificador
 & || b && a | | li
+#identificador

@@ -21,6 +21,18 @@
 %unicode
 
 %{
+  	static int identifierCount = 0;
+	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
+	private static void printIdentifier(String word) {
+		if(identifiers.get(word) != null) {
+			System.out.printf("[Id, %s]", identifiers.get(word));
+		} else {
+			identifierCount++;
+			identifiers.put(word, identifierCount);
+			System.out.printf("[Id, %s]", identifierCount);
+		}
+	}
+
   private void writeOtherChar(String value) {
   	switch(value){
   		case "=":
@@ -68,6 +80,8 @@ RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
 LogicalOperator = "&&"|"||"
 
+Identifier = "#identificador"
+
 Digit = [0-9]
 Id = [a-z][a-z0-9]*
 
@@ -90,6 +104,9 @@ Id = [a-z][a-z0-9]*
 
 /* logical operator */
 {LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
+
+/* check identifier */
+{Identifier} { printIdentifier(yytext()); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
