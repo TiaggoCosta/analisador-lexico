@@ -106,8 +106,6 @@ Digit = [0-9]
 Id = [a-zA-Z][a-zA-Z0-9]*
 String = (\"[^\"]*\")
 
-Identifier = "#"{Id}
-
 %%
 
 /* integers */
@@ -135,10 +133,7 @@ Identifier = "#"{Id}
 {String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); }
 
 /* identifiers */
-{Id} { System.out.println("identificador: " + yytext()); }
-
-/* check identifier */
-{Identifier} { printIdentifier(yytext()); }
+{Id} { printIdentifier(yytext()); }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
