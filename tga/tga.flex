@@ -31,6 +31,7 @@ import java.util.Map;
 	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
 	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
 	private static void printIdentifier(String word) {
+		int id = checkVariableScope(word);
 		if(identifiers.get(word) != null) {
 			System.out.printf("[Id, %s]", identifiers.get(word));
 		} else {
@@ -38,15 +39,19 @@ import java.util.Map;
 			identifiers.put(word, identifierCount);
 			System.out.printf("[Id, %s]", identifierCount);
 		}
-		System.out.println("Map id" + identifiers.toString());
+		System.out.println("Map id" + identifiers.toString()); // só para teste
 	}
 
-	private int checkVariableScope(String identifier) {
-		// map: <id><escopo>
+	private static int checkVariableScope(String identifier) {
 		// se declaração 
+		if(identifiers.get(identifier) == null){
 			// salva id + escopo
-		// senao
+			identifierScope.put(identifier, scope);
+			return scope;
+		} else {
 			// busca ultimo escopo para este id
+			return identifierScope.get(identifier);
+		}
 	}
 
   private void writeOtherChar(String value) {
@@ -55,9 +60,13 @@ import java.util.Map;
   			System.out.println("[equal, " + yytext() + "]"); 
   			break;
   		case "(":
+		    scope++;
   			System.out.println("[l_paren, " + yytext() + "]"); 
+			  System.out.println("Map id" + identifierScope.toString()); // só para teste
   			break;
   		case ")":
+		    identifierScope.values().remove(scope);
+		    scope--;
   			System.out.println("[r_paren, " + yytext() + "]"); 
   			break;
   		case "[":
@@ -67,10 +76,14 @@ import java.util.Map;
   			System.out.println("[r_bracket, " + yytext() + "]"); 
   			break;
       case "{":
+	    scope++;
         System.out.println("[l_braces, " + yytext() + "]"); 
         break;
       case "}":
+	    identifierScope.values().remove(scope);
+	    scope--;
         System.out.println("[r_braces, " + yytext() + "]"); 
+		System.out.println("Map id" + identifierScope.toString()); // só para teste
         break;
   		case ",":
   			System.out.println("[comma, " + yytext() + "]"); 
