@@ -26,8 +26,10 @@ import java.util.Map;
 %unicode
 
 %{
+	static int scope = 0;
   	static int identifierCount = 0;
 	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
+	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
 	private static void printIdentifier(String word) {
 		if(identifiers.get(word) != null) {
 			System.out.printf("[Id, %s]", identifiers.get(word));
@@ -37,6 +39,14 @@ import java.util.Map;
 			System.out.printf("[Id, %s]", identifierCount);
 		}
 		System.out.println("Map id" + identifiers.toString());
+	}
+
+	private int checkVariableScope(String identifier) {
+		// map: <id><escopo>
+		// se declaração 
+			// salva id + escopo
+		// senao
+			// busca ultimo escopo para este id
 	}
 
   private void writeOtherChar(String value) {
