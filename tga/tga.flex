@@ -70,6 +70,16 @@ import java.util.Map;
 		System.out.println("Map scope " + identifierScope.toString()); // só para teste
 	}
 
+	private static void closeScope(int scope) {
+		for(String key: identifierScope.keySet()) {
+			if(identifierScope.get(key).equals(scope)) {
+				identifiers.remove(key);
+			}
+		}
+		identifierScope.values().removeIf(val -> val.equals(scope));
+		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
+	}
+
 	private void writeOtherChar(String value) {
 		switch(value){
 			case "=":
@@ -95,6 +105,7 @@ import java.util.Map;
 				System.out.println("[l_braces, " + yytext() + "]"); 
 				break;
 			case "}":
+				closeScope(scope);
 				scope--;
 				System.out.println("[r_braces, " + yytext() + "]"); 
 				System.out.println("Map scope" + identifierScope.toString()); // só para teste
