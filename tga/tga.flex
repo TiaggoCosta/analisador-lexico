@@ -114,6 +114,8 @@ TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
 Comment = {TraditionalComment} | {EndOfLineComment}
 
+Includes = "#include <stdio.h>" | "#include <conio.h>"
+
 Condition = "if"|"else"|"switch"|"case"
 Loop = "do"|"while"|"for"|"break"
 Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"|"void"
@@ -163,6 +165,7 @@ String = (\"[^\"]*\")
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
+{Includes} { /* ignore */ }
 
 /* error fallback */
 [^] { System.out.println("Illegal character <" + yytext() + ">"); }
