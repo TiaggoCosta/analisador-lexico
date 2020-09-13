@@ -390,10 +390,10 @@ public class AnalisadorLexico {
 	private static void closeScope(int scope) {
 		for(String key: identifierScope.keySet()) {
 			if(identifierScope.get(key).equals(scope)) {
-				identifiers.remove(identifiers.get(key));
+				identifiers.remove(key);
 			}
 		}
-		identifierScope.values().remove(scope);
+		identifierScope.values().removeIf(val -> val.equals(scope));
 		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
 	}
 

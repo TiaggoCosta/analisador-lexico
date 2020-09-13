@@ -382,6 +382,7 @@ public class AnalisadorLexico {
 			identifierScope.put(word, scope);
 			System.out.printf("[Id, %s]", identifierCount);
 		}
+		System.out.println();
 		System.out.println("Map id " + identifiers.toString()); // só para teste
 		System.out.println("Map scope " + identifierScope.toString()); // só para teste
 	}
@@ -389,10 +390,10 @@ public class AnalisadorLexico {
 	private static void closeScope(int scope) {
 		for(String key: identifierScope.keySet()) {
 			if(identifierScope.get(key).equals(scope)) {
-				identifiers.remove(identifiers.get(key));
+				identifiers.remove(key);
 			}
 		}
-		identifierScope.values().remove(scope);
+		identifierScope.values().removeIf(val -> scope.equals(val));
 		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
 	}
 
