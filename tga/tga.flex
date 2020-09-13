@@ -140,7 +140,9 @@ RelationalOperator = "<"|"<="|"=="|"!="|">="|">"
 
 LogicalOperator = "&&"|"||"
 
-ArithmeticOperator = "+"|"-"|"*"|"/"
+ArithmeticOperator = "+"|"-"|"*"|"/"|"%"
+
+OtherOperator = "&"
 
 Digit = [0-9]
 Id = [a-zA-Z][a-zA-Z0-9]*
@@ -169,6 +171,9 @@ String = (\"[^\"]*\")
 
 /* arithmetic operator */
 {ArithmeticOperator} { System.out.println("[arithmetic_operator, " + yytext() + "]"); previousIsType = false; }
+
+/* other operators */
+{OtherOperator} { System.out.println("[operator, " + yytext() + "]"); previousIsType = false; }
 
 /* strings */
 {String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); previousIsType = false; }
