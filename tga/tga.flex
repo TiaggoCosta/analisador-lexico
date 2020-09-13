@@ -33,15 +33,31 @@ import java.util.Map;
 	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
 	 
 	private static void printIdentifier(String word) {
-    System.out.println("previous is type? " + previousIsType);
-		if(identifiers.get(word) != null) {
-			System.out.printf("[Id, %s]", identifiers.get(word));
-		} else {
-			// se novo guarda escopo nos dois maps.
+    	System.out.println("previous is type? " + previousIsType);
+		String variableScoped = word;
+		// se isType 
+		if(previousIsType){
+			// grava com novo id e escopo
 			identifierCount++;
-			identifiers.put(word, identifierCount);
+			if(scope > 0) {
+				variableScoped.concat(Integer.toString(scope));
+			}
+			identifiers.put(variableScoped, identifierCount);
 			identifierScope.put(word, scope);
 			System.out.printf("[Id, %s]", identifierCount);
+		} else {
+			// ao consultar busca o var com maior escopo
+			int searchScope = scope;
+			while(searchScope > 0) {
+				for(String key: identifierScope.keySet()) {
+					if(key.equals(word) && identifierScope.get(key).equals(searchScope)) {
+						variableScoped.concat(Integer.toString(searchScope));
+						searchScope = 0;
+					}
+				}
+				searchScope--;
+			}
+			System.out.printf("[Id, %s]", identifiers.get(variableScoped));
 		}
 		System.out.println();
 		System.out.println("Map id " + identifiers.toString()); // só para teste
