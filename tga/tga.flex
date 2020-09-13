@@ -26,9 +26,9 @@ import java.util.Map;
 %unicode
 
 %{
-  static boolean previousIsType;
+    static boolean previousIsType;
 	static int scope = 0;
-  static int identifierCount = 0;
+    static int identifierCount = 0;
 	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
 	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
 	 
@@ -43,6 +43,7 @@ import java.util.Map;
 			identifierScope.put(word, scope);
 			System.out.printf("[Id, %s]", identifierCount);
 		}
+		System.out.println();
 		System.out.println("Map id " + identifiers.toString()); // só para teste
 		System.out.println("Map scope " + identifierScope.toString()); // só para teste
 	}
@@ -50,7 +51,7 @@ import java.util.Map;
 	private static void closeScope(int scope) {
 		for(String key: identifierScope.keySet()) {
 			if(identifierScope.get(key).equals(scope)) {
-				identifiers.remove(key);
+				identifiers.remove(identifiers.get(key));
 			}
 		}
 		identifierScope.values().remove(scope);
