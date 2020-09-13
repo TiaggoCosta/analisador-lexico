@@ -26,12 +26,14 @@ import java.util.Map;
 %unicode
 
 %{
+  static boolean previousIsType;
 	static int scope = 0;
-  	static int identifierCount = 0;
+  static int identifierCount = 0;
 	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
 	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
 	 
 	private static void printIdentifier(String word) {
+    System.out.println("previous is type? " + previousIsType);
 		if(identifiers.get(word) != null) {
 			System.out.printf("[Id, %s]", identifiers.get(word));
 		} else {
@@ -118,9 +120,10 @@ Includes = "#include <stdio.h>" | "#include <conio.h>"
 
 Condition = "if"|"else"|"switch"|"case"
 Loop = "do"|"while"|"for"|"break"
-Type = "int"|"float"|"double"|"string"|"bool"|"null"|"NULL"|"void"
+Type = "int"|"float"|"double"|"string"|"bool"|"void"
+NullType = "null"|"NULL"
 OtherReservedWord = "return"
-ReservedWord = {Condition} | {Loop} | {Type} | {OtherReservedWord}
+ReservedWord = {Condition} | {Loop} | {NullType} | {OtherReservedWord}
 
 OtherCharacteres = "="|"("|")"|"{"|"}"|"["|"]"|","|";"|"."
 
@@ -137,31 +140,32 @@ String = (\"[^\"]*\")
 %%
 
 /* integers */
-{Digit}+ { System.out.println("[num, " + yytext() + "]"); }
+{Digit}+ { System.out.println("[num, " + yytext() + "]"); previousIsType = false; }
 
 /* floats */
-{Digit}+"."{Digit}+ { System.out.println("[num, " + yytext() + "]"); }
+{Digit}+"."{Digit}+ { System.out.println("[num, " + yytext() + "]"); previousIsType = false; }
 
 /* reserved words */
-{ReservedWord} { System.out.println("[reserved_word, " + yytext() + "]"); }
+{ReservedWord} { System.out.println("[reserved_word, " + yytext() + "]"); previousIsType = false; }
+{Type} { System.out.println("[reserved_word, " + yytext() + "]"); previousIsType = true; }
 
 /* other characteres */
-{OtherCharacteres} { writeOtherChar(yytext()); }
+{OtherCharacteres} { writeOtherChar(yytext()); previousIsType = false; }
 
 /* relational operator */
-{RelationalOperator} { System.out.println("[relational_operator, " + yytext() + "]"); }
+{RelationalOperator} { System.out.println("[relational_operator, " + yytext() + "]"); previousIsType = false; }
 
 /* logical operator */
-{LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); }
+{LogicalOperator} { System.out.println("[logical_operator, " + yytext() + "]"); previousIsType = false; }
 
 /* arithmetic operator */
-{ArithmeticOperator} { System.out.println("[arithmetic_operator, " + yytext() + "]"); }
+{ArithmeticOperator} { System.out.println("[arithmetic_operator, " + yytext() + "]"); previousIsType = false; }
 
 /* strings */
-{String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); }
+{String} { System.out.println("[string_literal, " + getFormattedString(yytext()) + "]"); previousIsType = false; }
 
 /* identifiers */
-{Id} { printIdentifier(yytext()); }
+{Id} { printIdentifier(yytext()); previousIsType = false; }
 
 {WhiteSpace} { /* ignore */ }
 {Comment} { /* ignore */ }
