@@ -48,10 +48,10 @@ import java.util.Map;
 	private static void closeScope(int scope) {
 		for(String key: identifierScope.keySet()) {
 			if(identifierScope.get(key).equals(scope)) {
-				System.out.println(key); 
+				identifiers.remove(key);
 			}
 		}
-		//identifierScope.values().remove(scope);
+		identifierScope.values().remove(scope);
 		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
 	}
 
