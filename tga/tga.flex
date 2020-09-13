@@ -30,28 +30,29 @@ import java.util.Map;
   	static int identifierCount = 0;
 	static Map<String, Integer> identifiers = new HashMap<String, Integer>();
 	static Map<String, Integer> identifierScope = new HashMap<String, Integer>();
+	 
 	private static void printIdentifier(String word) {
-		int id = checkVariableScope(word);
 		if(identifiers.get(word) != null) {
 			System.out.printf("[Id, %s]", identifiers.get(word));
 		} else {
+			// se novo guarda escopo nos dois maps.
 			identifierCount++;
 			identifiers.put(word, identifierCount);
+			identifierScope.put(word, scope);
 			System.out.printf("[Id, %s]", identifierCount);
 		}
-		System.out.println("Map id" + identifiers.toString()); // só para teste
+		System.out.println("Map id " + identifiers.toString()); // só para teste
+		System.out.println("Map scope " + identifierScope.toString()); // só para teste
 	}
 
-	private static int checkVariableScope(String identifier) {
-		// se declaração 
-		if(identifiers.get(identifier) == null){
-			// salva id + escopo
-			identifierScope.put(identifier, scope);
-			return scope;
-		} else {
-			// busca ultimo escopo para este id
-			return identifierScope.get(identifier);
+	private static void closeScope(int scope) {
+		for(String key: identifierScope.keySet()) {
+			if(identifierScope.get(key).equals(scope)) {
+				System.out.println(key); 
+			}
 		}
+		//identifierScope.values().remove(scope);
+		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
 	}
 
   private void writeOtherChar(String value) {
@@ -65,7 +66,8 @@ import java.util.Map;
 			  System.out.println("Map id" + identifierScope.toString()); // só para teste
   			break;
   		case ")":
-		    identifierScope.values().remove(scope);
+		    // se fechou escopo apaga todos com escopo igual
+		    closeScope(scope);
 		    scope--;
   			System.out.println("[r_paren, " + yytext() + "]"); 
   			break;
@@ -80,7 +82,8 @@ import java.util.Map;
         System.out.println("[l_braces, " + yytext() + "]"); 
         break;
       case "}":
-	    identifierScope.values().remove(scope);
+	    // se fechou escopo apaga todos com escopo igual
+	    closeScope(scope);
 	    scope--;
         System.out.println("[r_braces, " + yytext() + "]"); 
 		System.out.println("Map id" + identifierScope.toString()); // só para teste
