@@ -61,13 +61,11 @@ import java.util.Map;
 				identifierCount++;
 				identifiers.put(word, identifierCount);
 				identifierScope.put(word, scope);
-				System.out.printf("[Id, %s]", identifierCount);
+				System.out.printf("[Id, %s ]\n", identifierCount);
 			} else {
-				 System.out.printf("[Id, %s]", identifiers.get(variableScoped));
+				 System.out.printf("[Id, %s]\n", identifiers.get(variableScoped));
 			}
 		}
-		System.out.println("\nMap id " + identifiers.toString()); // só para teste
-		System.out.println("Map scope " + identifierScope.toString()); // só para teste
 	}
 
 	private static void closeScope(int scope) {
@@ -77,7 +75,6 @@ import java.util.Map;
 			}
 		}
 		identifierScope.values().removeIf(val -> val.equals(scope));
-		System.out.println("on scope " + scope + " Map scope is " + identifierScope.toString()); // só para teste
 	}
 
 	private void writeOtherChar(String value) {
@@ -88,7 +85,6 @@ import java.util.Map;
 			case "(":
 				scope++;
 				System.out.println("[l_paren, " + yytext() + "]"); 
-				System.out.println("Map scope" + identifierScope.toString()); // só para teste
 				break;
 			case ")":
 				scope--;
@@ -108,7 +104,6 @@ import java.util.Map;
 				closeScope(scope);
 				scope--;
 				System.out.println("[r_braces, " + yytext() + "]"); 
-				System.out.println("Map scope" + identifierScope.toString()); // só para teste
 				break;
 			case ",":
 				System.out.println("[comma, " + yytext() + "]"); 
