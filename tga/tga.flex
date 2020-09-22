@@ -43,7 +43,7 @@ import java.util.Map;
 			}
 			identifiers.put(variableScoped, identifierCount);
 			identifierScope.put(word, scope);
-			System.out.printf("[Id, %s]", identifierCount);
+			System.out.printf("[Id, %s]\n", identifierCount);
 		} else {
 			// ao consultar busca o var com maior escopo
 			int searchScope = scope;
@@ -110,9 +110,6 @@ import java.util.Map;
 				break;
 			case ";":
 				System.out.println("[semicolon, " + yytext() + "]"); 
-				break;
-			case ".":
-				System.out.println("[dot, " + yytext() + "]"); 
 				break;
 		}
 	}
